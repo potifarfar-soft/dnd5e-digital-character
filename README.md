@@ -1,4 +1,4 @@
 # dnd5e-digital-character
 # With @muthaias @fredrik-hjarner @kforsgren
 
-A digital trapper keeper for your dungeons and dragons 5:th edition character. An android app that manages your character's statistics, equipment, feats, spellbook, notes and combat dice rolls. The application will not help you level up your character, it's just a substitute from going from a paper character sheet to a digital one, on your personal tablet or phone.
+A digital trapper keeper for your dungeons and dragons 5:th edition character. A web-based application that helps manage your character's skills, equipment, feats, spells and adventuring notes on a digital character sheet accessible on your personal computer, tablet or phone.
