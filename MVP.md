@@ -9,7 +9,7 @@
 - Temporary modifiers such as conditions (blinded, charmed, paralyzed etc.), HP loss and gain, spell enhancements and bonuses can be set and be removed. Setting conditions and managing for example HP, is simplified for users on tablets and phones by adding point and click lists.
 - Inventory for equipment, valubles and coins. Inventory can be added or removed, both from the database and custom made ones. Carrying weight is calculated from the inventory.
 - Spell management. Known spells, memorized spells, spells used and unused spells are handled. Spell descriptions can be viewed. Players should be noted when the character have slots unused and not be allowed to memorize more than is allowed by the rules. Like the secondary values, known and memorized spells are dependent on class and levels.
-- A simple character logg/diary. Players can keep notes here. 
+- A simple character log/diary. Players can keep notes here. 
 
 # Future functions
 
