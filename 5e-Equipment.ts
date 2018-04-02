@@ -41,7 +41,7 @@ class Rangex {
     }
 }
 
-class Property { //changed from property to propertyx
+class Property {
     url: string;
     name: string;
     constructor(){
@@ -59,7 +59,7 @@ class ThrowRange {
     }
 }
 
-class twohDamage { //original line "2hDamage" but had to change it due to naming restrictions, leading number
+class twohDamage {
     dice_count: number;
     dice_value: number;
     damage_type: DamageType; //original variable type was blank, inserted "DamageType"
@@ -100,7 +100,7 @@ class Speed {
 }
 
 class Equipment {
-    static eqdbObj = JSON.parse(JSON.stringify(require("./5e-SRD-Equipment.json")));
+    static eqdbObj = JSON.parse(JSON.stringify(require("./5e-SRD-Equipment.json")).replace(/2h_damage/gi, 'twoh_damage')); //raplaced "2hDamage" to 'twoh_damage' due to naming restrictions when creating classes (leading number)
     index: number;
     name: string;
     equipment_category: string;
@@ -111,10 +111,10 @@ class Equipment {
     damage: Damage;
     range: Rangex; // i don't remember why i changed it to Rangex instad of Range. There was some kind of colission with another.. function, variable or something.
     weight: number;
-    properties: Property; //changed property to propertyx
+    properties: Property;
     url: string;
     throw_range: ThrowRange;
-    twoh_damage: twohDamage; //original line was "2h_damage: 2hDamage;", but had to change it due to naming restrictions, leading number
+    twoh_damage: twohDamage;
     special: string[];
     armor_category: string;
     armor_class: ArmorClass;
@@ -122,7 +122,7 @@ class Equipment {
     stealth_disadvantage?: boolean;
     gear_category: string;
     desc: string[];
-    contents: Content; //changed from Content to Contentx
+    contents: Content;
     tool_category: string;
     vehicle_category: string;
     speed: Speed;
@@ -184,64 +184,103 @@ class Equipment {
     }
 
     //creates an equipment item of a chosen equipment from equipment db, like "Backpack" or "Shortsword"
-    getEquipment(item){
+
+    getEquipment(item : string){
+
+        let thisAttribute : string[] = []; //have to create this array to collect attributes from this Class. Can't use Object.Keys- function for this. 
+        thisAttribute = Object.getOwnPropertyNames(this);
+
         for (let i in Equipment.eqdbObj){
             if(Equipment.eqdbObj[i].name==item){
-                this.index=Equipment.eqdbObj[i].index;
-                this.name=Equipment.eqdbObj[i].name;
-                this.equipment_category=Equipment.eqdbObj[i].equipment_category;
-                this.weapon_category=Equipment.eqdbObj[i].weapon_category;
-                this.weapon_range=Equipment.eqdbObj[i].weapon_range;
-                this.category_range=Equipment.eqdbObj[i].category_range;
-                this.cost.quantity = Equipment.eqdbObj[i].cost.quantity;
-                this.cost.unit = Equipment.eqdbObj[i].cost.unit;
-                this.damage.damage_type = Equipment.eqdbObj[i].damage.damage_type;
-                this.damage.dice_count = Equipment.eqdbObj[i].damage.dice_count;
-                this.damage.dice_value = Equipment.eqdbObj[i].damage.dice_value;
-                this.range.long = Equipment.eqdbObj[i].range.long;
-                this.range.normal = Equipment.eqdbObj[i].range.normal;
-                this.weight=Equipment.eqdbObj[i].weight;
-                this.properties = new Property;
-                this.properties.name = Equipment.eqdbObj[i].properties.name;
-                this.properties.url = Equipment.eqdbObj[i].properties.url;
-                this.url=Equipment.eqdbObj[i].url;
-                this.throw_range = new ThrowRange;
-                this.throw_range.long = Equipment.eqdbObj[i].throw_range.long;
-                this.throw_range.normal = Equipment.eqdbObj[i].throw_range.normal;
-                this.twoh_damage = new twohDamage;
-                //this.twoh_damage.damage_type = Equipment.eqdbObj[i].['2h_Damage'].damage_type;
-                //this.twoh_damage.dice_count = Equipment.eqdbObj[i].['2h_damage'].dice_count;
-                //this.twoh_damage.dice_count = Equipment.eqdbObj[i].twoh_damage.dice_count;
-                //this.twoh_damage.dice_value = Equipment.eqdbObj[i].twoh_damage.dice_value;
-                this.special=[Equipment.eqdbObj[i].special];
-                this.armor_category=Equipment.eqdbObj[i].armor_category;
-                this.armor_class = new ArmorClass;
-                this.armor_class.base = Equipment.eqdbObj[i].armor_class.base;
-                this.armor_class.dex_bonus = Equipment.eqdbObj[i].armor_class.dex_bonus;
-                this.armor_class.max_bonus = Equipment.eqdbObj[i].armor.class.max_bonus;
-                this.str_minimum=-1;
-                this.stealth_disadvantage=Equipment.eqdbObj[i].stealth_disadvantage;
-                this.gear_category=Equipment.eqdbObj[i].gear_category;
-                this.desc=[Equipment.eqdbObj[i].name];
-                this.contents = new Content;
-                this.tool_category=Equipment.eqdbObj[i].tool_category;
-                this.vehicle_category=Equipment.eqdbObj[i].vehicle_category;
-                this.speed = new Speed;
-                this.capacity=Equipment.eqdbObj[i].capacity;
+                for (let k in Equipment.eqdbObj[i]){
+                    for (let z in thisAttribute){
+                        let q = thisAttribute[z];
+                        if (k == thisAttribute[z]){ //should be possible to make this more efficienct by adding a switch and a break like in the z for loop, but it works like it is
+                            this[q] = Equipment.eqdbObj[i][k];
+                            break;
+                        }
+                    }
+                }
             }
         }
-        return new Equipment()
+    return new Equipment()
     }
 }
+
+/* Some code to test functions */
+
+
+/* Get a list of Weapons */
+//console.log(Equipment.getEquipmentList('Weapon'));
+
+/* Create an item, eg a longsword */
+//let newitem = new Equipment;
+//newitem.getEquipment('Longsword');
+//console.log(newitem)
+
+
+
+
 
 /* 
 
 TODO
 
 A function to create a particular item in Equipment from equipment-db
-encountered problems: In the .json-db there are keys that starts with a number, e.g '2h_damage'. I havn't found a way to handle them in typescript. Right now I'm trying to rename the keys, but without any success... 
+- Correct loop so that the item in Eqdbobj is the one that gets looped, giving it's properties to the created object. Now it's looping through all the attributes of the created equipment, even those that doesn't
+  even exist on the item that is supposed to be created, e.g. "Shortsword" doesn't have the attribute "twoh_damage", because it isn't specified in the JSONdb. 
 
 Sub-classes to Equipment, like Weapon, Adventure_Gear and so on. Would that be preferable? 
 
+
+
 */
 
+/*
+
+getEquipmentTemp(item : string){
+
+        let thisAttribute = []; //have to create this array to collect attributes from this Class. Can't use Object.Keys- function for this. 
+        thisAttribute = Object.getOwnPropertyNames(this);
+
+        for (let i in Equipment.eqdbObj){
+            if(Equipment.eqdbObj[i].name==item){
+                let n=0;
+                let index : string[] = [];
+
+                for (let k in Equipment.eqdbObj[i]){
+                    
+                    //console.log(Object.keys(Equipment.eqdbObj[i])[n]);
+                    //console.log(Equipment.eqdbObj[i][k]);
+
+                    for (let z in thisAttribute){
+                        //console.log(Object.keys(Equipment.eqdbObj[i])[k])
+                        console.log(thisAttribute[z]);
+                        console.log(k);
+                        //console.log(z);
+                        //console.log(this[z])
+                        console.log(Equipment.eqdbObj[i][k])
+                        console.log()
+
+                        if (Object.keys(Equipment.eqdbObj[i])[n] == thisAttribute[z]){
+                            //console.log(z);
+                            //console.log(this[z])
+                            this[z] = Equipment.eqdbObj[i][n];
+                            break;
+                        }
+
+                        if (k == z){
+                            //console.log(z);
+                            //console.log(this[z])
+                            this[z] = Equipment.eqdbObj[i][k];
+                            break;
+                        }
+                    }
+                //n=n+1;
+                }
+            }
+        }
+    return new Equipment()
+    }
+
+*/
