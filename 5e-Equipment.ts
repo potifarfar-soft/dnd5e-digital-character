@@ -1,14 +1,17 @@
+/**********************************************************************/
+/* Description: Code to create and fetch items from 5e-Equipment.json */
+/* Version: 0.X                                                       */
+/* Authors: Robin Djursäter (robin.djursater@gmail.com)               */
+/**********************************************************************/
 
 declare function require(name:string);
-//let eqdb: string = JSON.stringify(require("./5e-SRD-Equipment.json"));
-//let eqdbObj = JSON.parse(eqdb);
 
 class Cost {
     quantity: number;
     unit: string;
     constructor(){
-        this.quantity=-1;
-        this.unit='undef'
+        this.quantity=null;
+        this.unit=null
     }
 }
 
@@ -16,8 +19,8 @@ class DamageType {
     url: string;
     name: string;
     constructor(){
-        this.url='undef';
-        this.name='undef';
+        this.url=null;
+        this.name=null;
     }
 }
 
@@ -26,8 +29,8 @@ class Damage {
     dice_value: number;
     damage_type: DamageType;
     constructor(){
-        this.dice_count=-1;
-        this.dice_value=-1;
+        this.dice_count=null;
+        this.dice_value=null;
         this.damage_type = new DamageType;
     }
 }
@@ -36,8 +39,8 @@ class Rangex {
     normal: number;
     long?: any;
     constructor(){
-        this.normal=-1;
-        this.long=-1;
+        this.normal=null;
+        this.long=null;
     }
 }
 
@@ -45,8 +48,8 @@ class Property {
     url: string;
     name: string;
     constructor(){
-        this.url='undef';
-        this.name='undef';
+        this.url=null;
+        this.name=null;
     }
 }
 
@@ -54,8 +57,8 @@ class ThrowRange {
     normal: number;
     long: number;
     constructor(){
-        this.normal=-1;
-        this.long=-1;
+        this.normal=null;
+        this.long=null;
     }
 }
 
@@ -64,8 +67,8 @@ class twohDamage {
     dice_value: number;
     damage_type: DamageType; //original variable type was blank, inserted "DamageType"
     constructor(){
-        this.dice_value=-1;
-        this.dice_value=-1;
+        this.dice_value=null;
+        this.dice_value=null;
         this.damage_type = new DamageType;
     }
 }
@@ -75,9 +78,9 @@ class ArmorClass {
     dex_bonus: boolean;
     max_bonus?: number;
     constructor(){
-        this.base=-1;
+        this.base=null;
         this.dex_bonus=false;
-        this.max_bonus=-1;
+        this.max_bonus=null;
     }
 }
 
@@ -85,8 +88,8 @@ class Content {
     item_url: string;
     quantity: number;
     constructor(){
-        this.item_url='undef';
-        this.quantity=-1;
+        this.item_url=null;
+        this.quantity=null;
     }
 }
 
@@ -94,22 +97,22 @@ class Speed {
     quantity: number;
     unit: string;
     constructor(){
-        this.quantity=-1;
-        this.unit='undef'
+        this.quantity=null;
+        this.unit=null
     }
 }
 
 class Equipment {
-    static eqdbObj = JSON.parse(JSON.stringify(require("./5e-SRD-Equipment.json")).replace(/2h_damage/gi, 'twoh_damage')); //raplaced "2hDamage" to 'twoh_damage' due to naming restrictions when creating classes (leading number)
+    static eqdbObj = JSON.parse(JSON.stringify(require("./5e-SRD-Equipment.json")).replace(/2h_damage/gi, 'twoh_damage')); //raplaced "2hDamage" to 'twoh_damage' due to naming restrictions when creating classes (leading number). Maybe move this to the beginning of code?
     index: number;
     name: string;
     equipment_category: string;
-    weapon_category: string; // original line was "weapon_category::" , json element is written like "weapon_category:" (notice trailing ":"). Typescript uses : to define var type, hence :: which ts doesn't allow.
+    weapon_category: string; // original line was "weapon_category::" , json element is written like "weapon_category:" (notice the trailing ":"). Typescipt uses : to define var types, hence the declaration gets messed up with "::" 
     weapon_range: string;
     category_range: string;
     cost: Cost;
     damage: Damage;
-    range: Rangex; // i don't remember why i changed it to Rangex instad of Range. There was some kind of colission with another.. function, variable or something.
+    range: Rangex; // if "Range" is used there is a colission against reserved TS.. function or whatever it is. 
     weight: number;
     properties: Property;
     url: string;
@@ -128,34 +131,34 @@ class Equipment {
     speed: Speed;
     capacity: string;
 
-    // The constructor fills with default values so that I can create function and loop through the variables
+    // The constructor fills with default values (null) so that I can create function and loop through the variables
     constructor(){
-        this.index=-1;
-        this.name='undef';
-        this.equipment_category='undef';
-        this.weapon_category='undef';
-        this.weapon_range='undef';
-        this.category_range='undef';
+        this.index=null;
+        this.name=null;
+        this.equipment_category=null;
+        this.weapon_category=null;
+        this.weapon_range=null;
+        this.category_range=null;
         this.cost = new Cost;
         this.damage = new Damage;
         this.range = new Rangex;
-        this.weight=-1;
+        this.weight=null;
         this.properties = new Property;
-        this.url='undef';
+        this.url=null;
         this.throw_range = new ThrowRange;
         this.twoh_damage = new twohDamage;
-        this.special=['undef'];
-        this.armor_category='undef';
+        this.special=[null];
+        this.armor_category=null;
         this.armor_class = new ArmorClass;
-        this.str_minimum=-1;
+        this.str_minimum=null;
         this.stealth_disadvantage=false;
-        this.gear_category='undef';
-        this.desc=['undef'];
+        this.gear_category=null;
+        this.desc=[null];
         this.contents = new Content;
-        this.tool_category='undef';
-        this.vehicle_category='undef';
+        this.tool_category=null;
+        this.vehicle_category=null;
         this.speed = new Speed;
-        this.capacity='undef';
+        this.capacity=null;
     }
 
     //returns a list with all equipment categories
@@ -193,36 +196,32 @@ class Equipment {
         for (let i in Equipment.eqdbObj){
             if(Equipment.eqdbObj[i].name==item){
                 for (let k in Equipment.eqdbObj[i]){
-                    for (let z in thisAttribute){
-                        let q = thisAttribute[z];
-                        if (k == thisAttribute[z]){ //should be possible to make this more efficienct by adding a switch and a break like in the z for loop, but it works like it is
-                            this[q] = Equipment.eqdbObj[i][k];
-                            break;
-                        }
+                    if(thisAttribute.includes(k)){
+                        this[k]= Equipment.eqdbObj[i][k]
                     }
                 }
             }
         }
-    return new Equipment()
     }
 }
 
-/* Some code to test functions */
 
+
+/* Get list of equipment categories */
+//console.log(Equipment.getEquipmentTypeList())
 
 /* Get a list of Weapons */
 //console.log(Equipment.getEquipmentList('Weapon'));
 
 /* Create an item, eg a longsword */
-//let newitem = new Equipment;
-//newitem.getEquipment('Longsword');
-//console.log(newitem)
+// let newitem = new Equipment;
+// newitem.getEquipment('Longsword');
+// console.log(newitem)
 
+/* Some code to test functions */
+//console.log('test')
 
-
-
-
-/* 
+/******************************************************************************************************************************************************************************************************************
 
 TODO
 
@@ -232,55 +231,7 @@ A function to create a particular item in Equipment from equipment-db
 
 Sub-classes to Equipment, like Weapon, Adventure_Gear and so on. Would that be preferable? 
 
+Some properties are not set correctly, mainly due to naming complications in .json and reserved functions in TS, like range.
+- Weaponcategory is written like "weapon_category:" in the .json file. Would be better to just change it to "weapon_category". Make it replace it together with 2hand_damage.
 
-
-*/
-
-/*
-
-getEquipmentTemp(item : string){
-
-        let thisAttribute = []; //have to create this array to collect attributes from this Class. Can't use Object.Keys- function for this. 
-        thisAttribute = Object.getOwnPropertyNames(this);
-
-        for (let i in Equipment.eqdbObj){
-            if(Equipment.eqdbObj[i].name==item){
-                let n=0;
-                let index : string[] = [];
-
-                for (let k in Equipment.eqdbObj[i]){
-                    
-                    //console.log(Object.keys(Equipment.eqdbObj[i])[n]);
-                    //console.log(Equipment.eqdbObj[i][k]);
-
-                    for (let z in thisAttribute){
-                        //console.log(Object.keys(Equipment.eqdbObj[i])[k])
-                        console.log(thisAttribute[z]);
-                        console.log(k);
-                        //console.log(z);
-                        //console.log(this[z])
-                        console.log(Equipment.eqdbObj[i][k])
-                        console.log()
-
-                        if (Object.keys(Equipment.eqdbObj[i])[n] == thisAttribute[z]){
-                            //console.log(z);
-                            //console.log(this[z])
-                            this[z] = Equipment.eqdbObj[i][n];
-                            break;
-                        }
-
-                        if (k == z){
-                            //console.log(z);
-                            //console.log(this[z])
-                            this[z] = Equipment.eqdbObj[i][k];
-                            break;
-                        }
-                    }
-                //n=n+1;
-                }
-            }
-        }
-    return new Equipment()
-    }
-
-*/
+*****************************************************************************************************************************************************************************************************************/
