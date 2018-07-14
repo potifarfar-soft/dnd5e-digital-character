@@ -21,11 +21,6 @@ module.exports = {
     modules: ['node_modules', 'src'],
     extensions: ['.js', '.json', '.ts', '.tsx']
   },
-  // entry: './src/index.tsx', // <- default values
-  output: {
-    // path: path.join(__dirname, 'dist') // <- default values
-    // publicPath: '/' // default value: ''
-  },
   devServer: { contentBase: outputFolder },
   module: {
     rules: [typescriptRule, sassRule]

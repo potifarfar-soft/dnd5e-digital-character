@@ -9,7 +9,6 @@
     "target": "ESNext",                   // default: "ES3"
     "jsx": "react",                       // default: "preserve"
     "newLine": "lf",                      // default: varies depending upon platform
-    // "allowSyntheticDefaultImports": true, // default: false
 
     //////////////////////////
     // some experimentation //
