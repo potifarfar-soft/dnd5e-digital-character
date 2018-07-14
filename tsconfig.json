@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,                    // default: false
+    "noImplicitAny": true,                // default: false
+    /**
+     * What is this??
+     */
+    "module": "es6",                      // default: (target === "ES3" || target === "ES5") ? "CommonJS" : "ES6"
+    "target": "ESNext",                   // default: "ES3"
+    "jsx": "react",                       // default: "preserve"
+    "newLine": "lf",                      // default: varies depending upon platform
+    // "allowSyntheticDefaultImports": true, // default: false
+
+    //////////////////////////
+    // some experimentation //
+    //////////////////////////
+    "declaration": true,                  // default: false
+    "declarationDir": "./declarations",   // default: undefined
+    "declarationMap": true,               // default: false
+    "experimentalDecorators": true,       // default: false
+    "noUnusedLocals": true,               // default: false
+    "noUnusedParameters": true,           // default: false
+    "removeComments": true,               // default: false
+    "strictNullChecks": true,             // default: false
+    "moduleResolution": "node",           // default: (module === "AMD" || module === "System" || module === "ES6") ? "Classic" : "Node"
+    "baseUrl": "src"                      // default: undefined
+  },
+  "exclude": ["node_modules", "dist"]
+}
