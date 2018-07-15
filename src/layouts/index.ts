@@ -1,1 +1,1 @@
-export { Layout } from 'layouts/layout';
+export { NavbarLayout } from 'layouts/navbar-layout';

@@ -1,2 +1,2 @@
 export { Home } from 'routes/home';
-export { FourOhFour } from 'routes/404';
+export { Landing } from 'routes/landing/landing';

@@ -1,26 +1,34 @@
 import * as React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { Route, Switch } from 'react-router';
+import { Route, Switch, Redirect } from 'react-router';
 import { ConnectedRouter } from 'connected-react-router';
-import { Home, FourOhFour } from 'routes';
+import { Landing, Home } from 'routes';
 import { store } from 'redux/store';
 import { history } from 'redux/history';
-import { Layout } from 'layouts';
+import { NavbarLayout } from 'layouts';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'styles/global';
 
-const root = (
+const Routes = () => (
+  <Switch>
+    <Route exact path='/' component={Landing}/>
+    <NavbarLayout>
+      <Switch>
+        <Route exact path="/home" component={Home} />
+        <Redirect path='*' to='/'/>
+      </Switch>
+    </NavbarLayout>
+    <Redirect path='*' to='/'/>
+  </Switch>
+);
+
+const Root = () => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <Layout>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route component={FourOhFour} />
-        </Switch>
-      </Layout>
+      <Routes/>
     </ConnectedRouter>
   </Provider>
 );
 
-render(root, document.getElementById('react-root'));
+render(<Root/>, document.getElementById('react-root'));

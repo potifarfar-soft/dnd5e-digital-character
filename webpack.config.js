@@ -23,7 +23,10 @@ module.exports = {
     modules: ['node_modules', 'src'],
     extensions: ['.js', '.json', '.ts', '.tsx', '.sass']
   },
-  devServer: { contentBase: outputFolder },
+  devServer: {
+    contentBase: outputFolder,
+    historyApiFallback: true,
+  },
   module: {
     rules: [typescriptRule, sassRule, cssRule]
   }
