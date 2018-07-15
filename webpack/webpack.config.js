@@ -9,6 +9,15 @@ const typescriptRule = {
   use: 'ts-loader'
 };
 
+const tslintRule = {
+  include: x => x.endsWith('.ts') || x.endsWith('.tsx'),
+  enforce: 'pre',
+  use: {
+    loader: 'tslint-loader',
+    options: { /* Loader options go here */ }
+  }
+}
+
 const sassRule = {
   include: x => x.endsWith('.sass'),
   use: ['style-loader', 'css-loader', 'sass-loader']
@@ -35,6 +44,6 @@ module.exports = {
     historyApiFallback: true,
   },
   module: {
-    rules: [typescriptRule, sassRule, cssRule, fileLoaderRule]
+    rules: [tslintRule, typescriptRule, sassRule, cssRule, fileLoaderRule]
   }
 };
