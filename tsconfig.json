@@ -13,16 +13,19 @@
     //////////////////////////
     // some experimentation //
     //////////////////////////
-    "declaration": true,                  // default: false
-    "declarationDir": "./declarations",   // default: undefined
-    "declarationMap": true,               // default: false
+    // "declaration": true,                  // default: false
+    // "declarationDir": "./declarations",   // default: undefined
+    // "declarationMap": true,               // default: false
     "experimentalDecorators": true,       // default: false
     "noUnusedLocals": true,               // default: false
     "noUnusedParameters": true,           // default: false
     "removeComments": true,               // default: false
     "strictNullChecks": true,             // default: false
     "moduleResolution": "node",           // default: (module === "AMD" || module === "System" || module === "ES6") ? "Classic" : "Node"
-    "baseUrl": "src"                      // default: undefined
+    "baseUrl": ".",                       // default: undefined
+    "paths": {
+      "*": ["node_modules/*", "src/*"]
+    }
   },
   "exclude": ["node_modules", "dist"]
 }
