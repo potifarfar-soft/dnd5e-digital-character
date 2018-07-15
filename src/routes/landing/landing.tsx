@@ -3,8 +3,9 @@ import './style';
 
 export const Landing = () => (
   <div className='landing'>
-    <a href="/home">
+    <div>
       <h1>Landing page</h1>
-    </a>
+      <a href="/home"><h4>Continue to Potifarfar »</h4></a>
+    </div>
   </div>
 );

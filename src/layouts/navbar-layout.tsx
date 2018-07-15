@@ -8,6 +8,8 @@ interface Props {
 export const NavbarLayout = (props: Props) => (
   <>
     <Navbar/>
-    <div>{props.children}</div>
+    <div className="container-fluid">
+      <div style={{ marginTop: '80px' }}>{props.children}</div>
+    </div>
   </>
 );

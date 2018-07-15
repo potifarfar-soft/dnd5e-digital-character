@@ -7,7 +7,7 @@ import { Landing, Home } from 'routes';
 import { store } from 'redux/store';
 import { history } from 'redux/history';
 import { NavbarLayout } from 'layouts';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'semantic-ui-css/semantic.min.css';
 import 'styles/global';
 
 const Routes = () => (
@@ -26,7 +26,9 @@ const Routes = () => (
 const Root = () => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <Routes/>
+      <React.StrictMode>
+        <Routes/>
+      </React.StrictMode>
     </ConnectedRouter>
   </Provider>
 );

@@ -1,6 +1,8 @@
 const path = require('path');
+const webpack = require('webpack');
 
-const outputFolder = path.join(__dirname, 'dist');
+const rootFolder = path.join(__dirname, '..');
+const outputFolder = path.join(rootFolder, 'dist');
 
 const typescriptRule = {
   include: x => x.endsWith('.ts') || x.endsWith('.tsx'),
@@ -17,6 +19,11 @@ const cssRule = {
   use: ['style-loader', 'css-loader']
 };
 
+const fileLoaderRule = {
+  include: /\.(jpg|png|ttf|woff|woff2|eot|svg)$/,
+  use: ['file-loader']
+}
+
 module.exports = {
   mode: "development",
   resolve: {
@@ -28,6 +35,6 @@ module.exports = {
     historyApiFallback: true,
   },
   module: {
-    rules: [typescriptRule, sassRule, cssRule]
+    rules: [typescriptRule, sassRule, cssRule, fileLoaderRule]
   }
 };
