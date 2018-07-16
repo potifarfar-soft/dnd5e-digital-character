@@ -1,15 +1,15 @@
-import * as React from 'react';
-import { Navbar } from 'components';
+import { Navbar } from "components";
+import * as React from "react";
 
-interface Props {
-  children: JSX.Element
+interface IProps {
+  children: JSX.Element;
 }
 
-export const NavbarLayout = (props: Props) => (
+export const NavbarLayout = (props: IProps) => (
   <>
     <Navbar/>
     <div className="container-fluid">
-      <div style={{ marginTop: '80px' }}>{props.children}</div>
+      <div style={{ marginTop: "80px" }}>{props.children}</div>
     </div>
   </>
 );

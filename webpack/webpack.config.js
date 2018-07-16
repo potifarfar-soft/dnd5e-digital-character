@@ -12,10 +12,7 @@ const typescriptRule = {
 const tslintRule = {
   include: x => x.endsWith('.ts') || x.endsWith('.tsx'),
   enforce: 'pre',
-  use: {
-    loader: 'tslint-loader',
-    options: { /* Loader options go here */ }
-  }
+  use: 'tslint-loader'
 }
 
 const sassRule = {

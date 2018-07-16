@@ -1,11 +1,12 @@
-import * as React from 'react';
-import './style';
+import * as React from "react";
+import { Link } from "react-router-dom";
+import "./style";
 
 export const Landing = () => (
-  <div className='landing'>
+  <div className="landing">
     <div>
       <h1>Landing page</h1>
-      <a href="/home"><h4>Continue to Potifarfar »</h4></a>
+      <Link to="/home"><h4>Continue to Potifarfar »</h4></Link>
     </div>
   </div>
 );
