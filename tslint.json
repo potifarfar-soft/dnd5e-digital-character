@@ -11,7 +11,8 @@
       "quotemark": [true, "single", "jsx-double"],
       "max-classes-per-file": false,
       "no-empty": false,
-      "arrow-parens": false
+      "arrow-parens": false,
+      "indent": [true, "tabs"]
     },
     "rulesDirectory": []
 }
