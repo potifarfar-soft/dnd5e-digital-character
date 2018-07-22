@@ -4,13 +4,15 @@ const webpack = require('webpack');
 const rootFolder = path.join(__dirname, '..');
 const outputFolder = path.join(rootFolder, 'dist');
 
+const isTypeScriptFile = x => x.endsWith('.ts') || x.endsWith('.tsx');
+
 const typescriptRule = {
-  include: x => x.endsWith('.ts') || x.endsWith('.tsx'),
+  include: isTypeScriptFile,
   use: 'ts-loader'
 };
 
 const tslintRule = {
-  include: x => x.endsWith('.ts') || x.endsWith('.tsx'),
+  include: isTypeScriptFile,
   enforce: 'pre',
   use: 'tslint-loader'
 }

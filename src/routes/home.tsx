@@ -1,5 +1,5 @@
-import * as React from "react";
-import { Container } from "semantic-ui-react";
+import * as React from 'react';
+import { Container } from 'semantic-ui-react';
 
 export const Home = () => (
   <Container text>
