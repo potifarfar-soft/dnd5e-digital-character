@@ -12,7 +12,8 @@
       "max-classes-per-file": false,
       "no-empty": false,
       "arrow-parens": false,
-      "indent": [true, "tabs"]
+			"indent": [true, "tabs", 2],
+			"linebreak-style": [true, "LF"]
     },
     "rulesDirectory": []
 }

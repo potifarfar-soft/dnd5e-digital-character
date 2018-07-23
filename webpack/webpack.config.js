@@ -32,6 +32,8 @@ const fileLoaderRule = {
   use: ['file-loader']
 }
 
+const hotReloadingPlugin = new webpack.HotModuleReplacementPlugin();
+
 module.exports = {
   mode: "development",
   resolve: {
@@ -40,9 +42,11 @@ module.exports = {
   },
   devServer: {
     contentBase: outputFolder,
-    historyApiFallback: true,
+		historyApiFallback: true,
+		hot: true
   },
   module: {
     rules: [tslintRule, typescriptRule, sassRule, cssRule, fileLoaderRule]
-  }
+	},
+	plugins: [hotReloadingPlugin]
 };
