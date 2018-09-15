@@ -34,6 +34,12 @@ const fileLoaderRule = {
 
 const hotReloadingPlugin = new webpack.HotModuleReplacementPlugin();
 
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+const copyIndexHtmlToDist = new CopyWebpackPlugin([
+  { from: './src/index.html', to: './' },
+]);
+
 module.exports = {
   mode: "development",
   resolve: {
@@ -48,5 +54,5 @@ module.exports = {
   module: {
     rules: [tslintRule, typescriptRule, sassRule, cssRule, fileLoaderRule]
 	},
-	plugins: [hotReloadingPlugin]
+	plugins: [hotReloadingPlugin, copyIndexHtmlToDist]
 };
