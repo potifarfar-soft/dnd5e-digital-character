@@ -2,9 +2,11 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { LandingModule } from 'redux/modules';
+
 import './style';
 
-const _Landing = (props: any) => (
+const landing = (props: any) => (
 	<div className="landing">
 		<div>
 			<h1 onClick={props.fetchCharacter}>Landing page {props.character}</h1>
@@ -15,13 +17,12 @@ const _Landing = (props: any) => (
 );
 
 const mapStateToProps = (state: any) => ({
-	character: state.landing.character
+	character: state.landing.character,
 });
 
 const mapStateToDispatch = (dispatch: any) => ({
-	fetchCharacter: (id: any) => dispatch({ type: 'fetch-character', payload: { id } }),
-	updateCharacter: (name: string) => dispatch({ type: 'update-character', payload: { name } })
+	fetchCharacter: () => dispatch(LandingModule.fetchCharacter()),
+	updateCharacter: (name: string) => dispatch(LandingModule.updateCharacter(name)),
 });
 
-
-export const Landing = connect(mapStateToProps, mapStateToDispatch)(_Landing);
+export const Landing = connect(mapStateToProps, mapStateToDispatch)(landing);

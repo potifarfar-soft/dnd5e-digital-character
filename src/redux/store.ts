@@ -1,52 +1,32 @@
 import { connectRouter, routerMiddleware } from 'connected-react-router';
-import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
+import { applyMiddleware, compose, createStore, combineReducers, Store } from 'redux';
 
 import { history } from 'redux/history';
+import { LandingModule, LandingState } from './modules';
 
-let composeEnhancers = compose;
-
-if (typeof (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === 'function') {
-	// maxAge sets the number actions Redux DevTools should store. default 50.
-	composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ maxAge: 100 });
+interface State {
+	landing: LandingState;
 }
 
-type Action = {type: "fetch-character"} | {type: "update-character", payload: {name: string}};
+export class StoreManager {
+	public static createStore(): Store<State, any> {
+		let composeEnhancers = compose;
 
-/* interface ReducerModule {
-
-} */
-
-const initialState = {
-	character: null
-};
-
-const landingReducer = (state: object = initialState, action: Action) => {
-	switch(action.type) {
-		case 'fetch-character': {
-			return {
-				...state,
-				character: 'Nils',
-			};
+		if (typeof (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === 'function') {
+			// maxAge sets the number actions Redux DevTools should store. default 50.
+			composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ maxAge: 100 });
 		}
-		case 'update-character':
-			return {
-				...state,
-				character: action.payload.name,
-			};
-		default:
-			return state;
+
+		const rootReducer = combineReducers({
+			landing: LandingModule.reducer,
+		});
+
+		const reducer = connectRouter(history)(rootReducer);
+		const middleware = composeEnhancers(
+			applyMiddleware(
+				routerMiddleware(history), // for dispatching history actions
+			),
+		);
+		return createStore(reducer, {}, middleware);
 	}
-};
-
-const rootReducer = combineReducers({
-	landing: landingReducer,
-});
-
-const reducer = connectRouter(history)(rootReducer);
-const middleware = composeEnhancers(
-	applyMiddleware(
-		routerMiddleware(history), // for dispatching history actions
-	),
-);
-
-export const store = createStore(reducer, {}, middleware);
+}

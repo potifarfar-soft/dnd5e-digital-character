@@ -5,10 +5,12 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router';
 import { history } from 'redux/history';
-import { store } from 'redux/store';
+import { StoreManager } from 'redux/store';
 import { EqTest, Home, Landing } from 'routes';
 import 'semantic-ui-css/semantic.min.css';
 import 'styles/global';
+
+const store = StoreManager.createStore();
 
 const Routes = () => (
 	<Switch>
