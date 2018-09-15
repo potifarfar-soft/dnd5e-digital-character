@@ -18,7 +18,7 @@ const tslintRule = {
 }
 
 const sassRule = {
-  include: x => x.endsWith('.sass'),
+  include: x => x.endsWith('.scss') || x.endsWith('.sass'),
   use: ['style-loader', 'css-loader', 'sass-loader']
 };
 
@@ -44,7 +44,7 @@ module.exports = {
   mode: "development",
   resolve: {
     modules: ['node_modules', 'src'],
-    extensions: ['.js', '.json', '.ts', '.tsx', '.sass']
+    extensions: ['.js', '.json', '.ts', '.tsx', '.scss', '.sass']
   },
   devServer: {
     contentBase: outputFolder,
