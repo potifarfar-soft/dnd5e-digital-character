@@ -75,7 +75,7 @@ class AbilityScoresRoute extends React.Component<AbilityScoreRouteProps, Ability
 						<td>{this.calcModifier(this.state.charisma)}</td>
 					</tr>
 				</table>
-				<div className="button-container">
+				<div>
 					{this.state.edit || <Button color="blue" onClick={this.toggleEdit}>Edit</Button>}
 					{this.state.edit && <Button color="green" onClick={this.handleSave}>Save</Button>}
 					{this.state.edit && <Button color="red" onClick={this.handleCancel}>Cancel</Button>}
