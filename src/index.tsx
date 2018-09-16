@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router';
 import { history } from 'redux/history';
 import { StoreManager } from 'redux/store';
-import { EqTest, Home, Landing } from 'routes';
+import { EqTest, Home, Landing, AbilityScores } from 'routes';
 import 'semantic-ui-css/semantic.min.css';
 import 'styles/global';
 
@@ -19,6 +19,7 @@ const Routes = () => (
 			<Switch>
 				<Route exact path="/home" component={Home} />
 				<Route exact path="/eq-test" component={EqTest} />
+				<Route exact path="/ability-scores" component={AbilityScores} />
 				<Redirect path="*" to="/"/>
 			</Switch>
 		</NavbarLayout>

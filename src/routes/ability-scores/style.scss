@@ -1,0 +1,32 @@
+.ability-scores {
+	display: grid;
+	gap: 15px;
+	align-content: center;
+
+	& > * {
+		margin-left: auto !important;
+		margin-right: auto !important;
+	}
+
+	input {
+		width: 50px;
+		padding: 5px !important;
+	}
+
+	tr {
+		text-align: right;
+
+		td:first-child {
+			text-align: left;
+			font-weight: bold;
+		}
+
+		&:first-child td {
+			padding: 0 0 5px 10px;
+		}
+	}
+
+	.button-container {
+		/* display: inline-block; */
+	}
+}
