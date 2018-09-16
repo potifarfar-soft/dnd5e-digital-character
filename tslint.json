@@ -14,7 +14,8 @@
 			"indent": [true, "tabs", 2],
       "linebreak-style": [true, "LF"],
       "ordered-imports": false,
-      "eofline": false
+      "eofline": false,
+      "max-line-length": false
     },
     "rulesDirectory": []
 }
