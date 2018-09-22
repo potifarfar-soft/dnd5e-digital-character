@@ -2,10 +2,15 @@ import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { applyMiddleware, compose, createStore, combineReducers, Store } from 'redux';
 
 import { history } from 'redux/history';
-import { LandingModule, LandingState, AbilityScoreModule, AbilityScoreState } from './modules';
+import {
+	LandingModule, LandingState,
+	AbilityScoreModule, AbilityScoreState,
+	CharacterInfoModule, CharacterInfoState,
+} from './modules';
 
 export interface State {
 	abilityScores: AbilityScoreState;
+	characterInfo: CharacterInfoState;
 	landing: LandingState;
 }
 
@@ -20,6 +25,7 @@ export class StoreManager {
 
 		const rootReducer = combineReducers({
 			abilityScores: AbilityScoreModule.reducer,
+			characterInfo: CharacterInfoModule.reducer,
 			landing: LandingModule.reducer,
 		});
 

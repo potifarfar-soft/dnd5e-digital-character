@@ -1,0 +1,19 @@
+.character-info {
+	display: grid;
+	gap: 15px;
+	align-content: center;
+
+	& > * {
+		margin-left: auto !important;
+		margin-right: auto !important;
+	}
+
+	input {
+		width: 50px;
+		padding: 5px !important;
+	}
+
+	tr {
+		font-weight: bold;
+	}
+}
