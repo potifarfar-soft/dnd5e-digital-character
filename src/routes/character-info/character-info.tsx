@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Input, Button } from 'semantic-ui-react';
+import { Input, Button, Form } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
 import { State } from 'redux/store';
@@ -33,36 +33,18 @@ class CharacterInfoRoute extends React.Component<CharacterInfoRouteProps, Charac
 	public render() {
 		return (
 			<div className="character-info">
-				<table>
-					<tr>
-						<td>Player name</td>
-						<td colSpan={3}>{this.renderInput('playerName')}</td>
-					</tr>
-					<tr>
-						<td>Character name</td>
-						<td colSpan={3}>{this.renderInput('characterName')}</td>
-					</tr>
-					<tr>
-						<td>Race</td>
-						<td>{this.renderInput('race')}</td>
-						<td>Background</td>
-						<td>{this.renderInput('background')}</td>
-					</tr>
-					<tr>
-						<td>Alignment</td>
-						<td>{this.renderInput('alignment')}</td>
-					</tr>
-					<tr>
-						<td>Experience</td>
-						<td>{this.renderInput('experience', { type: 'number', min: 0 })}</td>
-					</tr>
-					<tr>
-						<td>Class</td>
-						<td>{this.renderInput('class')}</td>
-						<td>Level</td>
-						<td>{this.renderInput('level', { type: 'number', min: 0, max: 100 })}</td>
-					</tr>
-				</table>
+				<Form>
+					<div className="two-columns">
+						{this.renderInput('characterName')}
+						{this.renderInput('playerName')}
+						{this.renderInput('race')}
+						{this.renderInput('alignment')}
+						{this.renderInput('background')}
+						{this.renderInput('experience', { type: 'number', min: 0 })}
+						{this.renderInput('class')}
+						{this.renderInput('level', { type: 'number', min: 0, max: 100 })}
+					</div>
+				</Form>
 				<div>
 					{this.state.edit || <Button color="blue" onClick={this.toggleEdit}>Edit</Button>}
 					{this.state.edit && <Button color="green" onClick={this.handleSave}>Save</Button>}
@@ -73,13 +55,15 @@ class CharacterInfoRoute extends React.Component<CharacterInfoRouteProps, Charac
 	}
 
 	private renderInput = (name: FormInputName, props?: any) => (
-		<Input
-			name={name}
-			disabled={!this.state.edit}
-			value={this.state.characterInfo[name]}
-			onChange={this.handleChange}
-			{...props}
-		/>
+		<Form.Field disabled={!this.state.edit}>
+			<label>{name}</label>
+			<Input
+				name={name}
+				value={this.state.characterInfo[name]}
+				onChange={this.handleChange}
+				{...props}
+			/>
+		</Form.Field>
 	)
 
 	private handleChange = (_: any, { name, value, type }: { name: FormInputName, value: string, type: string}) => {
