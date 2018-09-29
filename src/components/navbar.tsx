@@ -8,5 +8,6 @@ export const Navbar = () => (
 		<Menu.Item as={Link} to="/character-info">CharacterInfo</Menu.Item>
 		<Menu.Item as={Link} to="/ability-scores">Abilities</Menu.Item>
 		<Menu.Item as={Link} to="/eq-test">Equipment test</Menu.Item>
+		<Menu.Item as={Link} to="/inventory">Inventory</Menu.Item>
 	</Menu>
 );
